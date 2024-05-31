@@ -1,6 +1,7 @@
-# Robot Controller
+# Malasimha
 
-Welcome to the Robot Controller repository! This project provides a versatile and powerful interface for controlling robots using Python and the Streamlit package. It supports multiple communication protocols, making it suitable for a variety of robotic applications.
+Welcome to the Malasimha repository! "Malasimha" is Hebrew for "what to put inside," reflecting the drag-and-drop interface for building custom robotic control solutions. This project provides a versatile and powerful interface for controlling robots using Python and the Streamlit package. It supports multiple communication protocols, making it suitable for a variety of robotic applications.
+
 
 ## Features
 
@@ -11,21 +12,13 @@ Welcome to the Robot Controller repository! This project provides a versatile an
 
 ## Getting Started
 
-### Prerequisites
-
-- Python 3.7 or higher
-- Streamlit
-- MAVLink
-- ROS (Robot Operating System)
-- Additional Python packages (specified in `requirements.txt`)
-
 ### Installation
 
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/yourusername/robot-controller.git
-    cd robot-controller
+    git clone https://github.com/yuval-dimri/malasimha.git
+    cd malasimha
     ```
 
 2. Install the required packages:
@@ -37,7 +30,7 @@ Welcome to the Robot Controller repository! This project provides a versatile an
 3. Run the Streamlit app:
 
     ```sh
-    streamlit run app.py
+    streamlit run main.py
     ```
 
 ### Usage
@@ -53,19 +46,3 @@ Supported protocols:
 - **ROS**: For interacting with ROS-based robots via topics and services.
 - **JSON**: For sending data in a lightweight and readable format.
 
-### Example
-
-Here is a simple example of how to use the communicator library:
-
-```python
-from communicator import Communicator
-
-# Initialize the communicator with MAVLink protocol
-comm = Communicator(protocol='mavlink')
-
-# Send a command
-comm.send_command('TAKEOFF', altitude=10)
-
-# Receive data
-data = comm.receive_data()
-print(data)
