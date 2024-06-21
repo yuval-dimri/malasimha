@@ -1,0 +1,82 @@
+[
+    {
+        "type": "Slider",
+        "x": 3,
+        "y": 0,
+        "w": 1,
+        "h": 1,
+        "_key": "slider1",
+        "min_val": 10,
+        "max_val": 100,
+        "step": 1,
+        "default_val": 50
+    },
+    {
+        "type": "Checkbox",
+        "x": 0,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "_key": "checkbox_1",
+        "label": "eckbox",
+        "default_checked": false
+    },
+    {
+        "type": "TextInput",
+        "x": 0,
+        "y": 2,
+        "w": 1,
+        "h": 1,
+        "_key": "textinput_2",
+        "label": "New TextInput",
+        "default_value": ""
+    },
+    {
+        "type": "TextInput",
+        "x": 5,
+        "y": 0,
+        "w": 2,
+        "h": 2,
+        "_key": "textinput_3",
+        "label": "New TextInput",
+        "default_value": ""
+    },
+    {
+        "type": "TextInput",
+        "x": 0,
+        "y": 4,
+        "w": 1,
+        "h": 1,
+        "_key": "textinput_4",
+        "label": "New TextInput",
+        "default_value": ""
+    },
+    {
+        "type": "TextInput",
+        "x": 4,
+        "y": 3,
+        "w": 3,
+        "h": 2,
+        "_key": "textinput_5",
+        "label": "New TextInput",
+        "default_value": ""
+    },
+    {
+        "type": "Dropdown",
+        "x": 4,
+        "y": 6,
+        "w": 4,
+        "h": 2,
+        "_key": "0a903aa8-6ac8-4d7d-a0fc-22ec00030737",
+        "label": "New Dropdown"
+    },
+    {
+        "type": "Dropdown",
+        "x": 0,
+        "y": 8,
+        "w": 4,
+        "h": 2,
+        "_key": "91510269-6683-4aac-ac5f-96f3d05c5179",
+        "label": "New Dropdown"
+    }
+]
