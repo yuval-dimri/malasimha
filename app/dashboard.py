@@ -1,9 +1,8 @@
-# dashboard.py
-
 from streamlit_elements import dashboard, mui
 from contextlib import contextmanager
 from uuid import uuid4
 from abc import ABC, abstractmethod
+import streamlit as st
 
 
 class Dashboard:
@@ -32,45 +31,56 @@ class Dashboard:
 
     class Item(ABC):
 
-        def __init__(self, board, x, y, w, h, _key=None, **item_props):
+        def __init__(self, board, x, y, w, h, _key=None, topic="", label='set label', **item_props):
             self._key = _key if _key else str(uuid4())
+            self.label = label
             self._x = x
             self._y = y
             self._w = w
             self._h = h
-            self._label = item_props.pop('label', None)
+            self._topic = topic
             self._draggable_class = Dashboard.DRAGGABLE_CLASS
-            self.item_props = item_props
-            self.gui_manager = board.gui_manager  # Assign gui_manager from board
+            self._dark_mode = True
             board._register(dashboard.Item(
                 self._key, x, y, w, h, **item_props))
+            self.gui_manager = board.gui_manager
 
-        @contextmanager
-        def title_bar(self, padding="5px 15px 5px 15px"):
-            cursor_style = "move" if self.gui_manager.editing_allowed else "default"
+        def _switch_theme(self):
+            self._dark_mode = not self._dark_mode
+
+        def _callback(self, data):
+            # Convert the data to a dictionary and perform the callback.
+            if len(self._topic) < 1:
+                st.error(f'please provide a topic name for "{self.label}"')
+            self.gui_manager.value_set_callback(self._topic, data)
+            st.session_state.ros_topic = {"topic": self._topic, "data": data}
+
+        @ contextmanager
+        def title_bar(self, padding="5px 15px 5px 15px", dark_switcher=True):
             with mui.Stack(
                 key=self._key,
                 className=self._draggable_class,
                 alignItems="center",
-                direction="column",
+                # direction="row",
                 spacing=1,
                 sx={
                     "padding": padding,
-                    "borderBottom": 1,
+                    # "borderBottom": 1,
                     "borderColor": "divider",
-                    "overflow": "hidden",
-                    "cursor": cursor_style,  # Indicate draggable area only if editing is allowed
+                    # "overflow": "hidden",
+                    "cursor": "move" if self.gui_manager.editing_allowed else "default",
                 },
             ):
-                if self._label:
-                    mui.Typography(self._label, variant="h6",
-                                   sx={"marginBottom": "5px"})
+
+                # mui.Typography(self.label, variant="h6")
                 yield
 
-        @abstractmethod
+                # if dark_switcher and self.gui_manager.editing_allowed:
+                #     mui.IconButton(
+                #         mui.icon.Edit, onClick=self._switch_theme
+                #     )
+
+        @ abstractmethod
         def __call__(self):
             """Show elements."""
             raise NotImplementedError
-
-        def display(self):
-            self.__call__()

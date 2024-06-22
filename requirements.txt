@@ -1,0 +1,2 @@
+streamlit[all]==1.33.0
+streamlit-elements==0.1.0

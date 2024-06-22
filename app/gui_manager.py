@@ -28,6 +28,9 @@ class GuiManager:
     def toggle_editing(self, value):
         st.session_state.editing_allowed = value
 
+    def value_set_callback(self, topic, data):
+        print(f'sending: {data}, on topic: {topic}')
+
     @property
     def editing_allowed(self):
         return st.session_state.editing_allowed
@@ -60,9 +63,6 @@ class GuiManager:
         try:
             with open(self.config_file, 'r') as file:
                 self.configuration = json.load(file)
-                for ctrl in self.configuration:
-                    print(
-                        f"Loaded control: {ctrl['_key']} with position ({ctrl.get('x')}, {ctrl.get('y')}), size ({ctrl.get('w')}, {ctrl.get('h')})")
         except FileNotFoundError:
             self.configuration = []
 
@@ -80,17 +80,13 @@ class GuiManager:
             w = control.get('w', 4)
             h = control.get('h', 2)
             _key = control.get('_key', None)
-            label = control.get('label', None)
-
-            print(
-                f"Instantiating control: {_key} at ({x}, {y}) with size ({w}, {h})")
+            label = control.get('label')
 
             item_props = {k: v for k, v in control.items() if k not in [
                 'type', 'x', 'y', 'w', 'h', '_key', 'label']}
 
             control_instance = ControlClass(
-                self.dashboard, x, y, w, h, _key=_key, **item_props)
-            control_instance._label = label  # Assign label directly
+                self.dashboard, x, y, w, h, _key=_key, label=label, **item_props)
             self.controls.append(control_instance)
 
     def display_controls(self):

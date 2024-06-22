@@ -85,13 +85,11 @@ class Sidebar:
         })
         self.gui_manager.configuration.append(default_config)
         self.gui_manager.save_configuration()
-        st.experimental_rerun()  # Rerun to refresh the dashboard with the new control
 
     def update_configuration(self, edited_config):
         try:
             new_config = json.loads(edited_config)
             self.gui_manager.configuration = new_config
             self.gui_manager.save_configuration()
-            st.experimental_rerun()  # Rerun to apply the new configuration
         except json.JSONDecodeError:
             st.error("Invalid JSON format")

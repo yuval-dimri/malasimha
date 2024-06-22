@@ -30,7 +30,7 @@ def main():
     with elements('dashboard'):
         gui_manager.load_controls()
 
-        with dashboard(rowHeight=57):
+        with dashboard(rowHeight=70):
             gui_manager.display_controls()
 
 
